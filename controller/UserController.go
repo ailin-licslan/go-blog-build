@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-// RegisterUser 处理用户注册请求
+// RegisterUser 处理用户注册请求  TODO 密码可以考虑存密文  不要存明文
 func RegisterUser(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
