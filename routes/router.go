@@ -8,6 +8,11 @@ import (
 
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
+	router.GET("x", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"name": "LIN",
+		})
+	})
 	// 用户注册路由
 	router.POST("/register", controller.RegisterUser)
 	// 用户登录路由
