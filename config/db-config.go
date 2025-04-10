@@ -1,6 +1,11 @@
 package config
 
-func connectDB() (*gorm.DB, error) {
+import (
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+)
+
+func ConnectDB() (*gorm.DB, error) {
 	dsn := "root:123456@tcp(192.168.0.155:3306)/blogV3?charset=utf8mb4&parseTime=True&loc=Local"
 	return gorm.Open(mysql.Open(dsn), &gorm.Config{})
 }
