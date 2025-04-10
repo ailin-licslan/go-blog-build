@@ -1,10 +1,9 @@
 package routes
 
 import (
+	"github.com/gin-gonic/gin"
 	"go-blog-build/controller"
 	"go-blog-build/middleware"
-
-	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {
@@ -17,16 +16,16 @@ func SetupRouter() *gin.Engine {
 	// 受保护的路由组，需要认证
 	protected := router.Group("/protected", middleware.AuthMiddleware())
 	{
-		// 文章创建路由
-		protected.POST("/create-article", controller.CreateArticle)
-		// 获取所有文章路由
+		// 文章相关路由
+		protected.POST("/create - article", controller.CreateArticle)
 		protected.GET("/articles", controller.GetArticles)
-		// 获取单个文章路由
 		protected.GET("/articles/:id", controller.GetArticle)
-		// 文章更新路由
 		protected.PUT("/articles/:id", controller.UpdateArticle)
-		// 文章删除路由
 		protected.DELETE("/articles/:id", controller.DeleteArticle)
+
+		// 评论相关路由
+		protected.POST("/articles/:post_id/comments", controller.CreateComment)
+		protected.GET("/articles/:post_id/comments", controller.GetComments)
 	}
 
 	return router
