@@ -39,7 +39,8 @@ func GetArticles(c *gin.Context) {
 	// 数据库连接，在实际应用中从 config.ConnectDB() 获取
 	db := config.GetDB()
 	var posts []models.Post
-	if err := db.Find(&posts).Error; err != nil {
+	//Preload 预加载User
+	if err := db.Preload("User").Find(&posts).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch articles"})
 		return
 	}
@@ -57,10 +58,12 @@ func GetArticle(c *gin.Context) {
 	// 数据库连接，在实际应用中从 config.ConnectDB() 获取
 	db := config.GetDB()
 	var post models.Post
-	if err := db.First(&post, id).Error; err != nil {
+	//不展示User set User = nil
+	if err := db.Preload("User").First(&post, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Article not found"})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{"article": post})
 }
 
