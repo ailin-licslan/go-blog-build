@@ -23,9 +23,9 @@ func SetupRouter() *gin.Engine {
 		protected.PUT("/articles/:id", controller.UpdateArticle)
 		protected.DELETE("/articles/:id", controller.DeleteArticle)
 
-		// 评论相关路由
-		protected.POST("/articles/:post_id/comments", controller.CreateComment)
-		protected.GET("/articles/:post_id/comments", controller.GetComments)
+		// 评论相关路由 调整一下user/:post_id/comments  panic: ':post_id' in new path '/protected/articles/:post_id/comments' conflicts with existing wildcard ':id' in existing prefix '/protected/articles/:id'
+		protected.POST("/user/:post_id/comments", controller.CreateComment)
+		protected.GET("/user/:post_id/comments", controller.GetComments)
 	}
 
 	return router
