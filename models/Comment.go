@@ -7,6 +7,8 @@ type Comment struct {
 	Content string `gorm:"not null"`
 	UserID  uint
 	PostID  uint
-	User    User `gorm:"foreignKey:UserID"`
-	Post    Post `gorm:"foreignKey:PostID"`
+	//User    User `gorm:"foreignKey:UserID"`
+	//Post    Post `gorm:"foreignKey:PostID"`
+	Post Post `gorm:"references:ID"`
+	User User `gorm:"references:ID"`
 }

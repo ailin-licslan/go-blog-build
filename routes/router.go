@@ -22,7 +22,7 @@ func SetupRouter() *gin.Engine {
 	protected := router.Group("/protected", middleware.AuthMiddleware())
 	{
 		// 文章相关路由
-		protected.POST("/create - article", controller.CreateArticle)
+		protected.POST("/create-article", controller.CreateArticle)
 		protected.GET("/articles", controller.GetArticles)
 		protected.GET("/articles/:id", controller.GetArticle)
 		protected.PUT("/articles/:id", controller.UpdateArticle)
